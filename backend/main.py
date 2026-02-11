@@ -9,17 +9,11 @@ from dotenv import load_dotenv
 
 from backend.prompt import SYSTEM_PROMPT
 
-# -----------------------------
-# Load Environment Variables
-# -----------------------------
 load_dotenv(dotenv_path="backend/.env")
 
 LLM_API_KEY = os.getenv("LLM_API_KEY")
 LLM_API_URL = os.getenv("LLM_API_URL")
 
-# -----------------------------
-# Initialize FastAPI
-# -----------------------------
 app = FastAPI(title="Domain Expert LLM Chatbot")
 
 app.add_middleware(
@@ -30,21 +24,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# -----------------------------
-# In-Memory Session Store
-# -----------------------------
-# Format:
-# sessions = {
-#   session_id: [
-#       {"role": "user", "content": "..."},
-#       {"role": "assistant", "content": "..."}
-#   ]
-# }
 sessions = {}
 
-# -----------------------------
-# Request / Response Models
-# -----------------------------
 class ChatRequest(BaseModel):
     question: str
 
@@ -53,17 +34,10 @@ class ChatResponse(BaseModel):
     answer: str
 
 
-# -----------------------------
-# Health Check
-# -----------------------------
 @app.get("/")
 def health_check():
     return {"status": "Domain Expert LLM Chatbot is running"}
 
-
-# -----------------------------
-# Chat Endpoint (Session-Based)
-# -----------------------------
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest, req: Request, res: Response):
 
@@ -73,9 +47,6 @@ def chat(request: ChatRequest, req: Request, res: Response):
             detail="LLM API not configured."
         )
 
-    # -----------------------------
-    # Session Handling
-    # -----------------------------
     session_id = req.cookies.get("session_id")
 
     if not session_id:
@@ -97,9 +68,6 @@ def chat(request: ChatRequest, req: Request, res: Response):
     # Keep last 10 exchanges only (limit memory)
     trimmed_history = conversation_history[-10:]
 
-    # -----------------------------
-    # Build LLM Payload
-    # -----------------------------
     payload = {
         "model": "llama-3.1-8b-instant",
         "messages": [
