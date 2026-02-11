@@ -1,49 +1,200 @@
-# 🤖 Domain Expert LLM Chatbot for Machine Learning
+# 🧠 Domain Expert LLM Chatbot
 
-## Project Description
-Understanding Machine Learning concepts requires clear explanations, structured reasoning, and domain-specific guidance. Generic chatbots often provide broad or inconsistent responses that lack technical depth.
-
-This project implements a **Domain Expert LLM Chatbot** designed to function strictly as a **Machine Learning expert assistant**. The system integrates a large language model (LLM) via API and uses **prompt engineering** to constrain responses to Machine Learning concepts, ensuring clarity, correctness, and relevance for academic and project-oriented use cases.
+A full-stack AI chatbot designed to act as a Machine Learning domain expert.  
+The system integrates a real LLM API with a structured FastAPI backend and a responsive frontend interface.
 
 ---
 
-## Key Goals
-- Enforce Machine Learning domain expertise in chatbot responses  
-- Provide structured, step-by-step explanations of ML concepts  
-- Build a modular and extensible AI system  
-- Demonstrate real-world LLM integration using APIs  
+## 🚀 Overview
+
+The Domain Expert LLM Chatbot is a session-aware AI assistant that:
+
+- Answers Machine Learning theory and project-related questions
+- Maintains short-term conversational context
+- Uses prompt engineering (no fine-tuning)
+- Integrates with a live LLM API (Groq)
+- Implements a clean full-stack architecture
+
+This project demonstrates backend design, API integration, session handling, and UI system design.
 
 ---
 
-## Objectives
-- Assist students in learning Machine Learning theory and algorithms  
-- Apply prompt engineering to control LLM behavior  
-- Design a clean client–server architecture using FastAPI  
-- Enable future enhancements such as memory and document-based querying  
+## 🏗️ System Architecture
+
+Frontend (HTML/CSS/JavaScript)  
+⬇  
+FastAPI Backend (`/chat` REST endpoint)  
+⬇  
+Prompt Engineering Layer  
+⬇  
+Groq LLM API (Llama 3.1 Instant)  
 
 ---
 
-## System Architecture
-- **Frontend:** Web-based chat interface for user interaction  
-- **Backend:** FastAPI service handling API requests and responses  
-- **LLM Layer:** API-based large language model  
-- **Control Mechanism:** Prompt engineering for domain restriction  
+## 📂 Project Structure
 
----
-
-## Project Structure
-```text
-Domain-Expert-LLM-Chatbot/
+```
+domain-expert-llm-chatbot/
 │
 ├── backend/
-│   ├── main.py                 # FastAPI application
-│   ├── prompt.py               # System and domain prompts
-│   ├── requirements.txt        # Backend dependencies
+│   ├── main.py
+│   ├── prompt.py
+│   └── .env
 │
 ├── frontend/
-│   ├── index.html              # Chat interface
-│   ├── style.css               # UI styling
-│   └── script.js               # Frontend logic
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
 │
-├── README.md                   # Project documentation
-└── .gitignore                  # Ignored files
+└── README.md
+```
+
+---
+
+## 🧠 Key Features
+
+### ✅ Prompt-Engineered ML Expert
+- System prompt enforces domain restriction
+- Structured explanations
+- Focus on correctness and clarity
+
+### ✅ Session-Based Memory
+- Cookie-based session ID
+- Maintains last 10 message exchanges
+- Prevents cross-user conversation leakage
+
+### ✅ Full-Stack Integration
+- REST API design
+- Asynchronous frontend fetch
+- JSON request/response handling
+
+### ✅ Clean UI Implementation
+- Structured layout
+- Dynamic message rendering
+- Typing indicator
+- Clear chat functionality
+
+---
+
+## ⚙️ Technologies Used
+
+### Backend
+- Python
+- FastAPI
+- Requests
+- Pydantic
+
+### Frontend
+- HTML5
+- CSS3
+- Vanilla JavaScript
+
+### LLM Provider
+- Groq API
+- Model: `llama-3.1-8b-instant`
+
+---
+
+## 🔐 Environment Setup
+
+Create a `.env` file inside the `backend/` folder:
+
+```
+LLM_API_KEY=your_groq_key_here
+LLM_API_URL=https://api.groq.com/openai/v1/chat/completions
+```
+
+---
+
+## ▶️ Running the Project
+
+### 1️⃣ Install Dependencies
+
+```
+pip install fastapi uvicorn python-dotenv requests
+```
+
+### 2️⃣ Start Backend
+
+From project root:
+
+```
+uvicorn backend.main:app --reload
+```
+
+### 3️⃣ Open Frontend
+
+Open:
+
+```
+frontend/index.html
+```
+
+---
+
+## 📌 Example Use Cases
+
+- Explaining bias-variance tradeoff
+- Comparing optimization algorithms
+- Discussing regularization methods
+- Reviewing ML project approaches
+- Clarifying exam-related ML concepts
+
+---
+
+## 🧩 Design Decisions
+
+- No fine-tuning → Prompt engineering only
+- No database → In-memory session store (MVP)
+- Context trimming → Last 10 messages only
+- Clean modular structure for scalability
+
+---
+
+## 📸 Screenshots
+
+### 🖥️ Project Structure
+
+![structure](./screenshots/structure.png)
+
+### 💬 Chat Interaction Example
+
+![Chat Example](./screenshots/chat-example.png)
+![Chat Example(1)](./screenshots/chat-example(1).png)
+
+---
+
+
+## 📊 Architecture Diagram
+
+```
+User (Browser)
+      │
+      ▼
+Frontend (HTML/CSS/JS)
+      │
+      ▼
+FastAPI Backend (/chat endpoint)
+      │
+      ▼
+Prompt Engineering Layer
+      │
+      ▼
+Groq LLM API (llama-3.1-8b-instant)
+```
+
+---
+## 🚀 Future Improvements
+
+- Persistent database-backed memory
+- Authentication system
+- Markdown rendering
+- Multi-domain expert modes
+- Deployment to cloud platform
+
+---
+
+## 📄 License
+
+This project is for educational and portfolio purposes.
+
